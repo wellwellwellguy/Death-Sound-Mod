@@ -22,13 +22,6 @@ public class DeathSound implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        int percent = 0;
-        System.out.println("Loading Death Sound Mod...       (" + (percent) + "%)");
-        System.out.println("Loading Death Sound Mod...       (" + (percent+30) + "%)");
-        System.out.println("Loading Death Sound Mod...       (" + (percent+50) + "%)");
-        ModConfig.load();
-        System.out.println("Loading Death Sound Mod...       (" + (percent+70) + "%)");
-        System.out.println("Loading Death Sound Mod...       (" + (percent+99) + "%)");
         System.out.println("Death Sound Mod has been loaded. (100%)");
 
 
