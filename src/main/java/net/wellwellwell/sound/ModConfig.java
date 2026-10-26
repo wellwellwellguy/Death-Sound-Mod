@@ -47,23 +47,17 @@ public class ModConfig {
         props.setProperty("showMenuButton", String.valueOf(showMenuButton));
         props.setProperty("useFeet", String.valueOf(useFeet));
         props.setProperty("useDistance", String.valueOf(useDistance));
-
         props.setProperty("delayTicks", String.valueOf(delayTicks));
         props.setProperty("maxDistanceChunks", String.valueOf(maxDistanceChunks));
         props.setProperty("cooldownMS", String.valueOf(cooldownMS));
-
         props.setProperty("lastSoundTimestamp", String.valueOf(lastSoundTimestamp));
-
         props.setProperty("volume", String.valueOf(volume));
         props.setProperty("pitch", String.valueOf(pitch));
-
         props.setProperty("particleMultiplier", String.valueOf(particleMultiplier));
-
         props.setProperty("selectedSound", selectedSound);
         props.setProperty("filterMode", filterMode);
         props.setProperty("selectedEffect", String.valueOf(selectedEffect));
         props.setProperty("customSoundFileName", String.valueOf(customSoundFileName));
-
         props.setProperty("trackedPlayers", String.join(",", trackedPlayers));
 
         try (OutputStream out = Files.newOutputStream(CONFIG_FILE)) {
@@ -92,18 +86,13 @@ public class ModConfig {
             showMenuButton = Boolean.parseBoolean(props.getProperty("showMenuButton", "true"));
             useDistance = Boolean.parseBoolean(props.getProperty("useDistance", "false"));
             useFeet = Boolean.parseBoolean(props.getProperty("useFeet", "false"));
-
             delayTicks = Integer.parseInt(props.getProperty("delayTicks", "0"));
             maxDistanceChunks = Integer.parseInt(props.getProperty("maxDistanceChunks", "32"));
             cooldownMS = Integer.parseInt(props.getProperty("cooldownMS", "5000"));
-
             lastSoundTimestamp = Long.parseLong(props.getProperty("lastSoundTimestamp", "0"));
-
             volume = Float.parseFloat(props.getProperty("volume", "0.5"));
             pitch = Float.parseFloat(props.getProperty("pitch", "1.0"));
-
             particleMultiplier = Double.parseDouble(props.getProperty("particleMultiplier", "1.000"));
-
             selectedSound = props.getProperty("selectedSound", "wither");
             filterMode = props.getProperty("filterMode", "everyone");
             selectedEffect = props.getProperty("selectedEffect", "lightning");
