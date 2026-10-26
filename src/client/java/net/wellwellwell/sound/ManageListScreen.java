@@ -111,13 +111,12 @@ public class ManageListScreen extends Screen {
 
     @Override
     public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        this.renderBackground(poseStack); // In 1.19 Standard-Hintergrund
+        this.renderBackground(poseStack);
         super.render(poseStack, mouseX, mouseY, delta);
 
         int listTop = 85;
         int listBottom = this.height - 30;
 
-        // FIX: Scissor in 1.19
         double scale = this.minecraft.getWindow().getGuiScale();
         RenderSystem.enableScissor(
                 (int) ((this.width / 2 - 110) * scale),
