@@ -62,7 +62,7 @@ public class DeathSoundScreen extends Screen {
                     tempSpamProtect = !tempSpamProtect;
                     b.setMessage(Component.literal("Spam Protection: " + (tempSpamProtect ? "§aON" : "§cOFF")));
                 }).bounds(x, y, 200, 20)
-                .tooltip(Tooltip.create(Component.literal("Enable a cooldown between sounds"))) // Tooltip.of -> Tooltip.create
+                .tooltip(Tooltip.create(Component.literal("Enable a cooldown between sounds")))
                 .build());
 
 
