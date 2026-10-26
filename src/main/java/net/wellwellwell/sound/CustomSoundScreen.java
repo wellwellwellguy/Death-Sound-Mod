@@ -132,7 +132,7 @@ public class CustomSoundScreen extends Screen {
             if (file.getParentFile() != null) file.getParentFile().mkdirs();
 
             String jsonContent = String.format(
-                    "{\n  \"custom_ogg\": {\n    \"sounds\": [\n      {\n        \"name\": \"deathsound:%s\",\n        \"stream\": true\n      }\n    ]\n  }\n}",
+                    "{\n  \"custom_ogg\": {\n    \"sounds\": [\n      {\n        \"name\": \"deathsound:%s\",\n        \"stream\": true\n      }\n    ]\n  }\n}",  //Idk how this affects the file but whatever
                     name
             );
             java.nio.file.Files.writeString(file.toPath(), jsonContent);
