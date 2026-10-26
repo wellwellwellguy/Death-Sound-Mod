@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "death-sound",
+	"version": "1.0",
+	"name": "Death Sound Mod",
+	"description": "Adds a death sound  upon player deaths.",
+	"authors": [
+		"WellWellWellGuy"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/death-sound-mod",
+		"sources": "https://modrinth.com/mod/death-sound-mod"
+	},
+	"license": "All Rights Reserved",
+	"icon": "assets/deathsound/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.wellwellwell.sound.DeathSound"
+		]
+	},
+	"mixins": [
+      "sounds.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": ">=1.15  <=1.15.2",
+		"java": ">=8",
+		"fabric": "*"
+	}
+}

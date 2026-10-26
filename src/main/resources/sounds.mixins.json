@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "net.wellwellwell.sound.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+		"DeathSoundMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
