@@ -1,0 +1,125 @@
+package net.wellwellwell.sound.mixin;
+
+import net.wellwellwell.sound.DeathSound;
+import net.wellwellwell.sound.ModConfig;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+@Mixin(ClientPacketListener.class)
+public class DeathSoundMixin {
+
+    @Shadow private ClientLevel level;
+    @Unique
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+
+    @Inject(method = "handleEntityEvent", at = @At("RETURN"))
+    private void onPlayerDeath(ClientboundEntityEventPacket packet, CallbackInfo ci) {
+        if (!ModConfig.enabled || this.level == null) return;
+
+        if (packet.getEventId() == 3) {
+            Entity entity = packet.getEntity(this.level);
+
+            if (entity instanceof Player player) {
+                Minecraft client = Minecraft.getInstance();
+                if (client == null || client.player == null) return;
+
+                String playerName = player.getName().getString();
+                String ownName = client.player.getName().getString();
+                boolean isOnList = ModConfig.trackedPlayers.contains(playerName);
+                double tx = player.getX();
+                double ty = player.getY();
+                double tz = player.getZ();
+                double distMeters = Math.sqrt(player.distanceToSqr(client.player));
+                long now = System.currentTimeMillis();
+
+                DeathSound.deathHistory.add(0, new DeathSound.DeathEntry(playerName, tx, ty, tz, now));
+                if (DeathSound.deathHistory.size() > 8) DeathSound.deathHistory.remove(8);
+
+                if (ModConfig.debugMode) {
+                    String debugMsg = String.format("§8[§6Debug§8] §c%s §7died at §f%.0f %.0f %.0f §8(§a%s away§8)",
+                            playerName, tx, ty, tz, formatDistance(distMeters));
+                    client.player.sendSystemMessage(Component.literal(debugMsg));
+                }
+
+                if (ModConfig.notifyTrackedDeath && isOnList) {
+                    String msg = String.format("§6[DeathSound] §7Tracked Player §e%s §7died at §f%.0f, %.0f, %.0f §8(§a%s away§8)",
+                            playerName, tx, ty, tz, formatDistance(distMeters));
+                    client.player.sendSystemMessage(Component.literal(msg));
+                }
+
+                boolean shouldPlay = switch (ModConfig.filterMode.toLowerCase()) {
+                    case "list" -> isOnList;
+                    case "others" -> !playerName.equals(ownName);
+                    default -> true;
+                };
+
+                if (!shouldPlay) return;
+
+                if (ModConfig.maxDistanceChunks <= 19) {
+                    double maxDist = ModConfig.maxDistanceChunks * 16.0;
+                    if (distMeters > maxDist) return;
+                }
+
+                if (ModConfig.spamProtect && (now - ModConfig.lastPlayedTime < ModConfig.cooldownMS)) {
+                    if (ModConfig.debugMode) client.player.sendSystemMessage(Component.literal("§c[Debug] No sound because of cooldown."));
+                    return;
+                }
+                ModConfig.lastPlayedTime = now;
+
+                scheduler.schedule(() -> {
+                    client.execute(() -> {
+                        if (client.level != null) {
+                            SoundEvent soundToPlay = getSelectedSound();
+
+                            client.level.playLocalSound(tx, ty, tz, soundToPlay,
+                                    SoundSource.MASTER, ModConfig.volume, ModConfig.pitch, false);
+
+                            if (ModConfig.deathEffects) {
+                                LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, client.level);
+                                lightning.setPos(tx, ty, tz);
+                                lightning.setVisualOnly(true);
+                                client.level.addEntity(lightning);
+                            }
+                        }
+                    });
+                }, ModConfig.delayTicks * 50L, TimeUnit.MILLISECONDS);
+            }
+        }
+    }
+
+    @Unique
+    private String formatDistance(double meters) {
+        return ModConfig.useFeet ? String.format("%.1f ft", meters * 3.28084) : String.format("%.1f m", meters);
+    }
+
+    @Unique
+    private SoundEvent getSelectedSound() {
+        return switch (ModConfig.selectedSound.toLowerCase()) {
+            case "thunder" -> SoundEvents.LIGHTNING_BOLT_THUNDER;
+            case "explosion" -> SoundEvents.GENERIC_EXPLODE.value();
+            case "shrieker" -> SoundEvents.SCULK_SHRIEKER_SHRIEK;
+            default -> SoundEvents.WITHER_SPAWN;
+        };
+    }
+}
