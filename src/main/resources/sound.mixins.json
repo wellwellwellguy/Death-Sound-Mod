@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.wellwellwell.sound.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "DeathSoundMixin",
+    "GameMenuMixin",
+    "TitleScreenMixin",
+    "OptionsScreenMixin",
+    "TotemPopMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

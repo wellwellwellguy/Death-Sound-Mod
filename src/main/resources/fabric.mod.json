@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "death-sound",
+  "version": "1.2.3-1.21+",
+  "name": "Death Sound Mod",
+  "description": "Plays a death sound when players die within your render distance. Customizable via gui or commands.",
+  "authors": ["WellWellWellGuy"],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/death-sound-mod",
+    "issues": "https://github.com/wellwellwellguy/Death-Sound-Mod/issues"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["net.wellwellwell.sound.DeathSound"],
+    "modmenu": ["net.wellwellwell.sound.ModMenuIntegration"]
+  },
+  "icon": "assets/deathsound/icon.png",
+  "custom" : {
+    "fabric-renderer-api-v1:contains_renderer" : true,
+    "modmenu" : {
+      "links" : {
+        "Github" : "https://github.com/wellwellwellguy/Death-Sound-Mod",
+        "modmenu.modrinth" : "https://modrinth.com/mod/death-sound-mod"
+      }
+    }
+  },
+  "mixins": [
+    "sound.mixins.json"
+  ],
+  "suggests" :{
+    "modmenu": "*"
+  },
+  "depends": {
+    "fabricloader": ">=0.17.0",
+    "minecraft": ">1.20.6 <=1.21.11",
+    "fabric-api": ">=0.102.0"
+  }
+}
