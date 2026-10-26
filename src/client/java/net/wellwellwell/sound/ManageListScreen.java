@@ -144,7 +144,7 @@ public class ManageListScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double amountX, double amountY) { // amount wurde zu amountX, amountY
+    public boolean mouseScrolled(double mouseX, double mouseY, double amountX, double amountY) {
         int contentHeight = playerEntries.size() * 22;
         int viewHeight = this.height - 115;
         double maxScroll = Math.max(0, contentHeight - viewHeight);
