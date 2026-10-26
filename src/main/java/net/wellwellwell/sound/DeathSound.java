@@ -52,6 +52,7 @@ public class DeathSound implements ClientModInitializer {
 
         LOGGER.info("DeathSound Mod has been successfully loaded");
 
+        //I dont like that the commands are here, might make a new class for them
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
             var node = dispatcher.register(ClientCommandManager.literal("deathsound")
                     .then(ClientCommandManager.literal("on").executes(context -> {
