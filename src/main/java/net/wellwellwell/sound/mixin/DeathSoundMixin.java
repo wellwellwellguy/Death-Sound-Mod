@@ -95,7 +95,7 @@ public class DeathSoundMixin {
 
                 if (!filterPass) return;
                 /*
-                 After this only play sound & particle logic. If ModConfig.filterMode is list or others and the sound isn't played the particles aren't spawned
+                 Only sound and particle logic after here. If ModConfig.filterMode is list or others and the sound isn't played the particles aren't spawned
                  */
 
                 ModConfig.lastPlayedTime = now;
