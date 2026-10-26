@@ -1,0 +1,8 @@
+{
+  "classic_hurt": {
+    "subtitle": "deathsound.subtitle.classic_hurt",
+    "sounds": [
+      "deathsound:classic_hurt"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+	"required": true,
+	"package": "com.wellwellwell.sound.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"DeathSoundMixin",
+        "GameMenuMixin",
+        "OptionsScreenMixin",
+        "TitleScreenMixin",
+        "TotemPopMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
