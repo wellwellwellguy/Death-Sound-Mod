@@ -17,7 +17,7 @@ public class ModConfig {
     public static float pitch = 1.0f;
     public static String filterMode = "everyone";
     public static boolean deathEffects = false;
-    public static int maxDistanceChunks = 32;
+    public static int maxDistanceChunks = 32;   //32 = unlimited
     public static boolean monitorDeaths = false;
     public static boolean notifyTrackedDeath = false;
     public static String customSoundFileName = "";
@@ -73,7 +73,7 @@ public class ModConfig {
         try (OutputStream out = Files.newOutputStream(CONFIG_FILE)) {
             props.store(out, "DeathSound Config");
         } catch (IOException e) {
-            System.out.println("[DeathSound] Error during saving the config file.");
+            System.out.println("[DeathSound] Error during saving the config file.");  //may use System.err.println() for errors
         }
     }
 
