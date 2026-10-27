@@ -42,7 +42,7 @@ public class TotemPopMixin {
                             ? String.format("%.1f ft", distance * 3.28084)
                             : String.format("%.1f m", distance);
 
-                    minecraft.execute(() -> {
+                    minecraft.execute(() -> {              //new Thread
                         if (minecraft.player != null) {
                             minecraft.player.sendSystemMessage(
                                     Component.translatable("deathsound.monitor.pop",
@@ -59,7 +59,7 @@ public class TotemPopMixin {
                             minecraft.level.playLocalSound(
                                     target.getX(), target.getY(), target.getZ(),
                                     SoundEvents.TOTEM_USE,
-                                    net.minecraft.sounds.SoundSource.PLAYERS,
+                                    net.minecraft.sounds.SoundSource.MASTER,
                                     1.0F, 1.0F, false
                             );
                         }
