@@ -40,7 +40,7 @@ public class CustomSoundPack {
             {
               "pack": {
                 "pack_format": 15,
-                "supported_formats": [1,100],
+                "supported_formats": [1,100],                  
                 "min_format": 1.0,
                 "max_format": 100.0,
                 "description": "DeathSound-Resources"
