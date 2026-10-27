@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/datapack/death-sound-mod",
-        "issues": "https://github.com/wellwellwellguy/Death-Sound-Mod/issues"
+        "issues": "https://github.com/wellwellwellguy/Death-Sound-Mod/issues",
+		"source":"https://github.com/wellwellwellguy/Death-Sound-Mod/"
 	},
 	"license": "MIT",
 	"icon": "assets/deathsound/icon.png",
