@@ -79,7 +79,7 @@ public class DeathSound implements ClientModInitializer {
                                 case "shrieker"          -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "block.sculk_shrieker.shriek");
                                 case "warden_heartbeat"  -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "entity.warden.heartbeat");
                                 case "totem"             -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "item.totem.use");
-                                case "anvil"             -> Identifier.fromNamespaceAndPath("minecraft", "block.anvil.land");
+                                case "anvil"             -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "block.anvil.land");
                                 case "ghast"             -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "entity.ghast.scream");
                                 case "enderdragon"       -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "entity.ender_dragon.death");
                                 case "elder_guardian"    -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "entity.elder_guardian.curse");
@@ -97,7 +97,7 @@ public class DeathSound implements ClientModInitializer {
                                 client.getSoundManager().stop(selectedId, null);
                             }
 
-                            net.minecraft.resources.Identifier[] panicStopList = {
+                            net.minecraft.resources.Identifier[] panicStopList = {   //why did I name it like this
                                     Identifier.fromNamespaceAndPath("minecraft", "entity.wither.spawn"),
                                     Identifier.fromNamespaceAndPath("minecraft", "entity.lightning_bolt.thunder"),
                                     Identifier.fromNamespaceAndPath("minecraft", "entity.ender_dragon.death"),
