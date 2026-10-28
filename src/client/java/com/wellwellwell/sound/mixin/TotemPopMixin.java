@@ -53,6 +53,7 @@ public class TotemPopMixin {
                             );
                         }
 
+                        //For some reason the mod made totem pops invisible and nor play any sound. here it makes that manually
                         if (minecraft.level != null) {
                             minecraft.particleEngine.createTrackingEmitter(target, ParticleTypes.TOTEM_OF_UNDYING, 30);
 
