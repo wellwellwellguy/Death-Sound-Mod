@@ -17,9 +17,6 @@ import net.minecraft.sounds.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-
-
-
 import java.io.File;
 import java.util.*;
 
@@ -79,7 +76,7 @@ public class DeathSound implements ClientModInitializer {
                                 case "shrieker"          -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "block.sculk_shrieker.shriek");
                                 case "warden_heartbeat"  -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "entity.warden.heartbeat");
                                 case "totem"             -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "item.totem.use");
-                                case "anvil"             -> Identifier.fromNamespaceAndPath("minecraft", "block.anvil.land");
+                                case "anvil"             -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "block.anvil.land");
                                 case "ghast"             -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "entity.ghast.scream");
                                 case "enderdragon"       -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "entity.ender_dragon.death");
                                 case "elder_guardian"    -> selectedId = Identifier.fromNamespaceAndPath("minecraft", "entity.elder_guardian.curse");
@@ -190,7 +187,7 @@ public class DeathSound implements ClientModInitializer {
                             )
                     )
                     .then(ClientCommands.literal("distance")
-                            .then(ClientCommands.argument("chunks", IntegerArgumentType.integer(1, 100))
+                            .then(ClientCommands.argument("chunks", IntegerArgumentType.integer(1, 32))
                                     .executes(context -> {
                                         int dist = IntegerArgumentType.getInteger(context, "chunks");
                                         if (ModConfig.maxDistanceChunks == dist) {
@@ -200,7 +197,7 @@ public class DeathSound implements ClientModInitializer {
                                         ModConfig.maxDistanceChunks = dist;
                                         ModConfig.save();
 
-                                        if (dist >= 100) {
+                                        if (dist >= 32) {
                                             context.getSource().sendFeedback(Component.translatable("deathsound.command.distance.unlimited"));
                                         } else {
                                             context.getSource().sendFeedback(Component.translatable("deathsound.command.distance.set", dist));
