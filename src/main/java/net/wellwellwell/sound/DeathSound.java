@@ -19,7 +19,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-
 import java.io.File;
 import java.util.*;
 
@@ -42,6 +41,8 @@ public class DeathSound implements ClientModInitializer {
         StatsManager.load();
         CustomSoundPack.syncSounds();
         CustomSoundPack.init();
+
+        //genuinely how does this code still work in 1.21.11 if it is written for 1.21.1 I aint complaining tho
 
         File mcDir = MinecraftClient.getInstance().runDirectory;
         File resourcePacksDir = new File(mcDir, "resourcepacks");
@@ -993,14 +994,10 @@ public class DeathSound implements ClientModInitializer {
 
                     count = (int) Math.round(count * ModConfig.particleMultiplier);
 
-                    if (ModConfig.particleMultiplier >= 1000) {
-                        System.out.println("[Death Sound Mod] Warning: A particle multiplier that is too high might lag the game if your computer is older or as many particles are spawned at the same time.");
-                    }
-
                     for (int i = 0; i < count; i++) {
                         double offsetX = (random.nextDouble() - 0.5) * 1.5;
                         double offsetY = random.nextDouble() * 2.0;
-                        double offsetZ = (random.nextDouble() - 0.5) * 1.5;
+                        double offsetZ = (random.nextDouble() - 0.5) * 1.5;  //Line 1000!!!!!
 
                         double speedX = (random.nextDouble() - 0.5) * 0.2;
                         double speedY = (random.nextDouble() - 0.5) * 0.2;
