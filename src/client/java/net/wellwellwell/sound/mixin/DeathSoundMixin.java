@@ -117,7 +117,7 @@ public class DeathSoundMixin {
     private SoundEvent getSelectedSound() {
         return switch (ModConfig.selectedSound.toLowerCase()) {
             case "thunder" -> SoundEvents.LIGHTNING_BOLT_THUNDER;
-            case "explosion" -> SoundEvents.GENERIC_EXPLODE.value();
+            case "explosion" -> SoundEvents.GENERIC_EXPLODE.value();   //why is it different?
             case "shrieker" -> SoundEvents.SCULK_SHRIEKER_SHRIEK;
             default -> SoundEvents.WITHER_SPAWN;
         };
