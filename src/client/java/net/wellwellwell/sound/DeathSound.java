@@ -1,21 +1,16 @@
 package net.wellwellwell.sound;
 
 import com.mojang.authlib.minecraft.client.MinecraftClient;
-import com.mojang.brigadier.arguments.FloatArgumentType;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.arguments.*;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.command.v2.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.*;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.phys.Vec3;
-
 import java.util.ArrayList;
 import java.util.List;
 import static java.lang.String.format;
@@ -91,13 +86,13 @@ public class DeathSound implements ClientModInitializer {
                             context.getSource().sendFeedback(Component.literal("§6[DeathSound] §7No deaths recorded yet."));
                             return 1;
                         }
-                        context.getSource().sendFeedback(Component.literal("§6§l----- Death History -----"));
+                        context.getSource().sendFeedback(Component.literal("§6§l------ Death History ------"));
                         for (DeathEntry entry : DeathSound.deathHistory) {
                             long totalSeconds = (System.currentTimeMillis() - entry.timestamp()) / 1000;
                             String timeStr = (totalSeconds < 60) ? totalSeconds + "s ago" : (totalSeconds / 60) + "min ago";
                             context.getSource().sendFeedback(Component.literal(format("§e%s §7died §b%s §7at §f%.0f, %.0f, %.0f", entry.playerName(), timeStr, entry.x(), entry.y(), entry.z())));
                         }
-                        context.getSource().sendFeedback(Component.literal("§6§l-----------------------  "));
+                        context.getSource().sendFeedback(Component.literal("§6§l-------------------------"));
                         return 1;
                     }))
                     .then(ClientCommandManager.literal("locate")
