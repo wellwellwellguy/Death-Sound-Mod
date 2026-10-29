@@ -45,7 +45,7 @@ public class DeathSound implements ClientModInitializer {
         File mcmeta = new File(baseFolder, "pack.mcmeta");
         if (!mcmeta.exists()) {
             try (java.io.FileWriter writer = new java.io.FileWriter(mcmeta)) {
-                writer.write("{\"pack\":{\"pack_format\":15,\"description\":\"Required for custom death sounds.\"}}");
+                writer.write("{\"pack\":{\"pack_format\":45,\"description\":\"Required for custom death sounds.\"}}");
             } catch (IOException e) { e.printStackTrace(); }
         }
 
@@ -177,13 +177,13 @@ public class DeathSound implements ClientModInitializer {
                             context.getSource().sendFeedback(Text.literal("§6[DeathSound] §7No deaths recorded yet."));
                             return 1;
                         }
-                        context.getSource().sendFeedback(Text.literal("§6§l----- Death History -----"));
+                        context.getSource().sendFeedback(Text.literal("§6§l------ Death History ------"));
                         for (DeathEntry entry : DeathSound.deathHistory) {
                             long totalSeconds = (System.currentTimeMillis() - entry.timestamp()) / 1000;
                             String timeStr = (totalSeconds < 60) ? totalSeconds + "s ago" : (totalSeconds / 60) + "min ago";
                             context.getSource().sendFeedback(Text.literal(format("§e%s §7died §b%s §7at §f%.0f, %.0f, %.0f", entry.playerName(), timeStr, entry.x(), entry.y(), entry.z())));
                         }
-                        context.getSource().sendFeedback(Text.literal("§6§l-----------------------  "));
+                        context.getSource().sendFeedback(Text.literal("§6§l-------------------------"));
                         return 1;
                     }))
                     .then(ClientCommandManager.literal("locate")
