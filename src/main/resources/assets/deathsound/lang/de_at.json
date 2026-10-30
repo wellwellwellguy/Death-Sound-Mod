@@ -162,5 +162,5 @@
   "deathsound.screen.settings.effects.toggle": "Todes-Effekte: %s",
   "deathsound.screen.custom.reload_tooltip": "Sounds neu laden",
   "deathsound.screen.effects.select_below": "Wähle unten einen Toteseffekt aus:",
-  "deathsound.command.particle_multiplier.set": "[DeathSound] Partikel-Multiplikator wurde auf %s gesetzt"
+  "deathsound.command.particle_multiplier.set": "§f[§bTod-G'schrei§f] Partikl-Multiplikator wurd auf %s gsetzt."
 }
